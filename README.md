@@ -1,21 +1,3 @@
-<head>
-  <style>
-    h1{
-      background-color: #f0f0f0;
-      padding: 10px 10px 10px 20px;
-      border-radius: 8px;
-      color: #333;
-    }
-    h2{
-      background-color: #f0f0f0;
-      padding: 5px 5px 5px 10px;
-      border-radius: 8px;
-      color: #333;
-    }
-  </style>
-</head>
-
-
 <h1>Audition Post</h1>
 
 [//]: # (# Audition Post)
