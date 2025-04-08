@@ -1,0 +1,61 @@
+spring:
+  application:
+    name: audition-api
+  config:
+    import: "optional:configserver:"
+    base-path: "https://jsonplaceholder.typicode.com"
+  main:
+    allow-bean-definition-overriding: true
+  autoconfigure:
+    exclude:
+      - org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration
+  mvc:
+    throw-exception-if-no-handler-found: true
+  security:
+    user:
+      username: admin
+      password: adminPassword
+      role: USER
+
+server:
+  max-http-request-header-size: 16KB
+  port: 8080
+
+management:
+  tracing:
+    sampling:
+      probability: 1.0
+  endpoints:
+    web:
+      exposure:
+        include: 'info,health'
+  security:
+    enabled: true
+  info:
+    env:
+      enabled: true
+
+info:
+  app:
+    name: Audition Post
+    description: Retrieve details on Auditions Posts and Comments
+    version: 1.0.0
+
+logging:
+  pattern:
+    level: "%5p [${spring.application.name:},%X{traceId:-},%X{spanId:-}]"
+  interceptor:
+    enabled: true
+
+otel:
+  exporter:
+    logging:
+      enabled: true
+  traces:
+    sampler:
+      probability: 1.0
+    exporter: none
+  metrics:
+    exporter: none
+  logs:
+    exporter: none

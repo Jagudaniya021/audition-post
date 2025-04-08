@@ -1,0 +1,10 @@
+C:\src\audition-api\build\classes\java\test\com\audition\AuditionApplicationTests.class
+C:\src\audition-api\build\classes\java\test\com\audition\configuration\CustomAuthenticationEntryPointTest.class
+C:\src\audition-api\build\classes\java\test\com\audition\configuration\ResponseHeaderInjectorTest$ResponseHeaderInjectorTestable.class
+C:\src\audition-api\build\classes\java\test\com\audition\configuration\ResponseHeaderInjectorTest.class
+C:\src\audition-api\build\classes\java\test\com\audition\configuration\WebServiceConfigurationTest.class
+C:\src\audition-api\build\classes\java\test\com\audition\impl\AuditionServiceImplTest.class
+C:\src\audition-api\build\classes\java\test\com\audition\integration\AuditionIntegrationClientTest.class
+C:\src\audition-api\build\classes\java\test\com\audition\logging\AuditionLoggerTest.class
+C:\src\audition-api\build\classes\java\test\com\audition\logging\LoggingInterceptorTest.class
+C:\src\audition-api\build\classes\java\test\com\audition\web\AuditionControllerTest.class

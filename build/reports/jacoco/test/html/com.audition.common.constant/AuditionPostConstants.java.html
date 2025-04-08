@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>AuditionPostConstants.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">audition-api</a> &gt; <a href="index.source.html" class="el_package">com.audition.common.constant</a> &gt; <span class="el_source">AuditionPostConstants.java</span></div><h1>AuditionPostConstants.java</h1><pre class="source lang-java linenums">/*
+ * Copyright 2025 XYZ, Inc.
+ *  Licensed under the XYZ License, Version 1.0
+ *  you may not use this file except in compliance with the License.
+ *  You may obtain a copy of the License at
+ *
+ *   http://www.xyz.org/licenses/LICENSE-1.0
+ */
+
+package com.audition.common.constant;
+
+import java.text.MessageFormat;
+
+/**
+ * All required constant values for audition post.
+ */
+public final class AuditionPostConstants {
+
+    // Public constants for API endpoints
+    public static final String JSON_PLACEHOLDER_POST_FILTER_PATH = &quot;/posts&quot;;
+    public static final String JSON_PLACEHOLDER_POST_ID_PATH = &quot;/posts/&quot;;
+    public static final String JSON_PLACEHOLDER_POST_WITH_COMMENTS_PATH = &quot;/posts/{0}/comments&quot;;
+    public static final String JSON_PLACEHOLDER_COMMENTS_PATH = &quot;/comments&quot;;
+
+    // OpenTelemetry
+    public static final String TRACE_ID = &quot;X-OpenTelemetry-TraceId&quot;;
+    public static final String SPAN_ID = &quot;X-OpenTelemetry-SpanId&quot;;
+
+    //Error Messages
+    public static final String ERROR_PARSING_ERROR_RESPONSE = &quot;Error parsing error response message from external API.&quot;;
+    public static final String NO_COMMENTS_FOUND_FOR_POST_ID_MATCHING = &quot;No comments found for postId matching: &quot;;
+    public static final String NO_POSTS_FOUND_FOR_ID_MATCHING = &quot;No posts found for id matching: &quot;;
+    public static final String NO_POSTS_FOUND = &quot;No posts found.&quot;;
+
+    private AuditionPostConstants() {
+    }
+
+    public static String getJsonPlaceholderPostWithComment(final String postId) {
+<span class="fc" id="L39">        return MessageFormat.format(JSON_PLACEHOLDER_POST_WITH_COMMENTS_PATH, postId);</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>

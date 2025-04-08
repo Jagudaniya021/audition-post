@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Comment.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">audition-api</a> &gt; <a href="index.source.html" class="el_package">com.audition.model</a> &gt; <span class="el_source">Comment.java</span></div><h1>Comment.java</h1><pre class="source lang-java linenums">package com.audition.model;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import io.swagger.v3.oas.annotations.media.Schema;
+import java.io.Serializable;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
+@Getter
+<span class="nc" id="L12">@Setter</span>
+<span class="nc" id="L13">@NoArgsConstructor</span>
+@Schema(description = &quot;Comments object&quot;)
+@JsonInclude(JsonInclude.Include.NON_NULL)
+@JsonIgnoreProperties(ignoreUnknown = true)
+public class Comment implements Serializable {
+
+    private static final long serialVersionUID = 1L;
+
+    @Schema(description = &quot;PostId&quot;)
+<span class="nc" id="L22">    private int postId;</span>
+    @Schema(description = &quot;Comment Id&quot;)
+<span class="nc" id="L24">    private int id;</span>
+    @Schema(description = &quot;Name&quot;)
+<span class="nc" id="L26">    private String name;</span>
+    @Schema(description = &quot;Email&quot;)
+<span class="nc" id="L28">    private String email;</span>
+    @Schema(description = &quot;Body&quot;)
+<span class="nc" id="L30">    private String body;</span>
+
+<span class="fc" id="L32">    public Comment(final int postId, final int id, final String name, final String email, final String body) {</span>
+<span class="fc" id="L33">        this.postId = postId;</span>
+<span class="fc" id="L34">        this.id = id;</span>
+<span class="fc" id="L35">        this.name = name;</span>
+<span class="fc" id="L36">        this.email = email;</span>
+<span class="fc" id="L37">        this.body = body;</span>
+<span class="fc" id="L38">    }</span>
+
+    @Override
+    public String toString() {
+<span class="nc" id="L42">        return &quot;Comment{&quot; + &quot;postId=&quot; + postId + &quot;, id=&quot; + id + &quot;, name='&quot; + name + '\'' + &quot;, email='&quot; + email + '\''</span>
+            + &quot;, body='&quot; + body + '\'' + '}';
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>

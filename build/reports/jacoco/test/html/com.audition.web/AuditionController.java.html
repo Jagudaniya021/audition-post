@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>AuditionController.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">audition-api</a> &gt; <a href="index.source.html" class="el_package">com.audition.web</a> &gt; <span class="el_source">AuditionController.java</span></div><h1>AuditionController.java</h1><pre class="source lang-java linenums">/*
+ * Copyright 2025 XYZ, Inc.
+ *  Licensed under the XYZ License, Version 1.0
+ *  you may not use this file except in compliance with the License.
+ *  You may obtain a copy of the License at
+ *
+ *   http://www.xyz.org/licenses/LICENSE-1.0
+ */
+
+package com.audition.web;
+
+import com.audition.model.AuditionPost;
+import com.audition.model.Comment;
+import com.audition.service.AuditionService;
+import io.swagger.v3.oas.annotations.OpenAPIDefinition;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.info.Info;
+import io.swagger.v3.oas.annotations.tags.Tag;
+import java.util.List;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
+
+/**
+ * Handles all the requests for audition post.
+ */
+@OpenAPIDefinition(info = @Info(title = &quot;Audition Post&quot;, version = &quot;v1&quot;, description = &quot;Audition Post Data Retrieval&quot;), tags = {
+    @Tag(name = &quot;Audition Post&quot;, description = &quot;Operations related to Audition Post&quot;)})
+@RestController
+<span class="fc" id="L39">public class AuditionController {</span>
+
+<span class="fc" id="L41">    private static final Logger LOGGER = LoggerFactory.getLogger(AuditionController.class);</span>
+
+    @Autowired
+    private transient AuditionService auditionService;
+
+    /**
+     * Returns all audition posts filtering with title if provided else returns all posts.
+     *
+     * @param title - audition title.
+     * @return list of auditionPost.
+     */
+    @Operation(summary = &quot;Get a post with optional filtering by title&quot;)
+    @GetMapping(value = &quot;/posts&quot;, produces = MediaType.APPLICATION_JSON_VALUE)
+    public @ResponseBody ResponseEntity&lt;List&lt;AuditionPost&gt;&gt; getPostsWithFilter(
+        @Parameter(description = &quot;title to filter post&quot;, required = false) @RequestParam(required = false) final String title) {
+
+<span class="fc" id="L57">        LOGGER.debug(&quot;Entering method AuditionController.getPostsWithFilter with title: {}&quot;, title);</span>
+
+        //Added title to filter if passed. It will return post that contain input string in title
+<span class="fc" id="L60">        final List&lt;AuditionPost&gt; auditionPostList = auditionService.getPosts(title);</span>
+
+<span class="fc" id="L62">        LOGGER.debug(&quot;Exiting method AuditionController.getPostsWithFilter with title: {}&quot;, title);</span>
+<span class="fc" id="L63">        return ResponseEntity.status(HttpStatus.OK).body(auditionPostList);</span>
+    }
+
+    /**
+     * Returns all audition posts for given postId.
+     *
+     * @param postId - audition post id.
+     * @return audition post.
+     */
+    @Operation(summary = &quot;Get post by id&quot;)
+    @GetMapping(value = &quot;/posts/{id}&quot;, produces = MediaType.APPLICATION_JSON_VALUE)
+    public @ResponseBody ResponseEntity&lt;AuditionPost&gt; getPosts(
+        @Parameter(description = &quot;Post Id&quot;) @PathVariable(&quot;id&quot;) final String postId) {
+
+<span class="fc" id="L77">        LOGGER.debug(&quot;Entering method AuditionController.getPosts with postId: {}&quot;, postId);</span>
+
+<span class="fc" id="L79">        auditionService.postIdValidation(postId);</span>
+<span class="fc" id="L80">        final AuditionPost auditionPosts = auditionService.getPostById(postId);</span>
+
+<span class="fc" id="L82">        LOGGER.debug(&quot;Exiting method AuditionController.getPosts with postId: {}&quot;, postId);</span>
+<span class="fc" id="L83">        return ResponseEntity.ok(auditionPosts);</span>
+    }
+
+    /**
+     * Returns audition posts for given postId with all comments.
+     *
+     * @param postId - audition post id.
+     * @return audition post comments.
+     */
+    @Operation(summary = &quot;Get all comments with post for given post id&quot;)
+    @GetMapping(value = &quot;/posts/{id}/comments&quot;, produces = MediaType.APPLICATION_JSON_VALUE)
+    public @ResponseBody ResponseEntity&lt;AuditionPost&gt; getPostWithComments(
+        @Parameter(description = &quot;Post Id&quot;) @PathVariable(&quot;id&quot;) final String postId) {
+
+<span class="fc" id="L97">        LOGGER.debug(&quot;Entering method AuditionController.getPostWithComments with postId: {}&quot;, postId);</span>
+
+<span class="fc" id="L99">        auditionService.postIdValidation(postId);</span>
+<span class="fc" id="L100">        final AuditionPost auditionPostComment = auditionService.getPostWithComments(postId);</span>
+
+<span class="fc" id="L102">        LOGGER.debug(&quot;Exiting method AuditionController.getPostWithComments with postId: {}&quot;, postId);</span>
+<span class="fc" id="L103">        return ResponseEntity.ok(auditionPostComment);</span>
+    }
+
+    /**
+     * Returns all comments for given postId.
+     *
+     * @param postId - audition post id.
+     * @return list of comments.
+     */
+    @Operation(summary = &quot;Get all comments by id&quot;)
+    @GetMapping(value = &quot;/comments&quot;, produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity&lt;List&lt;Comment&gt;&gt; getCommentById(
+        @Parameter(description = &quot;Post Id&quot;) @RequestParam(&quot;postId&quot;) final String postId) {
+
+<span class="fc" id="L117">        LOGGER.debug(&quot;Exiting method AuditionController.getCommentById with postId: {}&quot;, postId);</span>
+
+<span class="fc" id="L119">        auditionService.postIdValidation(postId);</span>
+<span class="fc" id="L120">        final List&lt;Comment&gt; commentList = auditionService.getComments(postId);</span>
+
+<span class="fc" id="L122">        LOGGER.debug(&quot;Exiting method AuditionController.getCommentById with postId: {}&quot;, postId);</span>
+<span class="fc" id="L123">        return ResponseEntity.status(HttpStatus.OK).body(commentList);</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>

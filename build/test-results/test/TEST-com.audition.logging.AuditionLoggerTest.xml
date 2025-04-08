@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.audition.logging.AuditionLoggerTest" tests="16" skipped="0" failures="0" errors="0" timestamp="2025-04-08T00:07:21" hostname="JAGUDANIYA" time="0.203">
+  <properties/>
+  <testcase name="infoLoggingTestWithMessage()" classname="com.audition.logging.AuditionLoggerTest" time="0.11"/>
+  <testcase name="logStandardProblemDetailTest()" classname="com.audition.logging.AuditionLoggerTest" time="0.02"/>
+  <testcase name="debugLoggingTestFalse()" classname="com.audition.logging.AuditionLoggerTest" time="0.004"/>
+  <testcase name="infoLoggingTestWithMessageAndObject()" classname="com.audition.logging.AuditionLoggerTest" time="0.005"/>
+  <testcase name="warnLoggingTest()" classname="com.audition.logging.AuditionLoggerTest" time="0.002"/>
+  <testcase name="infoLoggingTestWithMessageFAlse()" classname="com.audition.logging.AuditionLoggerTest" time="0.004"/>
+  <testcase name="infoLoggingTestWithMessageAndObjectFalse()" classname="com.audition.logging.AuditionLoggerTest" time="0.005"/>
+  <testcase name="debugLoggingTest()" classname="com.audition.logging.AuditionLoggerTest" time="0.005"/>
+  <testcase name="logErrorWithExceptionTestFalse()" classname="com.audition.logging.AuditionLoggerTest" time="0.004"/>
+  <testcase name="warnLoggingTestFalse()" classname="com.audition.logging.AuditionLoggerTest" time="0.005"/>
+  <testcase name="errorLoggingTestFalse()" classname="com.audition.logging.AuditionLoggerTest" time="0.003"/>
+  <testcase name="logHttpStatusCodeErrorTest()" classname="com.audition.logging.AuditionLoggerTest" time="0.004"/>
+  <testcase name="logErrorWithExceptionTest()" classname="com.audition.logging.AuditionLoggerTest" time="0.003"/>
+  <testcase name="logStandardProblemDetailTestFalse()" classname="com.audition.logging.AuditionLoggerTest" time="0.004"/>
+  <testcase name="logHttpStatusCodeErrorTestFalse()" classname="com.audition.logging.AuditionLoggerTest" time="0.004"/>
+  <testcase name="errorLoggingTest()" classname="com.audition.logging.AuditionLoggerTest" time="0.003"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

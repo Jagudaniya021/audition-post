@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.audition.logging.LoggingInterceptorTest" tests="2" skipped="0" failures="0" errors="0" timestamp="2025-04-08T00:07:21" hostname="JAGUDANIYA" time="0.167">
+  <properties/>
+  <testcase name="interceptTestLoggingDiabled()" classname="com.audition.logging.LoggingInterceptorTest" time="0.15"/>
+  <testcase name="interceptTestLoggingEnabled()" classname="com.audition.logging.LoggingInterceptorTest" time="0.016"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

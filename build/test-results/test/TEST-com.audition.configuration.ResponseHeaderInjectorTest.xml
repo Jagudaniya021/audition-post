@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.audition.configuration.ResponseHeaderInjectorTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2025-04-08T00:07:19" hostname="JAGUDANIYA" time="0.54">
+  <properties/>
+  <testcase name="headerInjectionTestWithTraceAndSpanIds()" classname="com.audition.configuration.ResponseHeaderInjectorTest" time="0.54"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

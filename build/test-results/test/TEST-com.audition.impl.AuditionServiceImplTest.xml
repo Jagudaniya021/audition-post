@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.audition.impl.AuditionServiceImplTest" tests="12" skipped="0" failures="0" errors="0" timestamp="2025-04-08T00:07:21" hostname="JAGUDANIYA" time="0.166">
+  <properties/>
+  <testcase name="getPostByIdTest()" classname="com.audition.impl.AuditionServiceImplTest" time="0.05"/>
+  <testcase name="getCommentsTest()" classname="com.audition.impl.AuditionServiceImplTest" time="0.007"/>
+  <testcase name="getPostsTestWithNoDataException()" classname="com.audition.impl.AuditionServiceImplTest" time="0.008"/>
+  <testcase name="getPostsTestWithNoTitle()" classname="com.audition.impl.AuditionServiceImplTest" time="0.037"/>
+  <testcase name="postIdValidationTestWithValidPostId()" classname="com.audition.impl.AuditionServiceImplTest" time="0.008"/>
+  <testcase name="postIdValidationTestWithNagativePostId()" classname="com.audition.impl.AuditionServiceImplTest" time="0.004"/>
+  <testcase name="getPostWithCommentsTest()" classname="com.audition.impl.AuditionServiceImplTest" time="0.006"/>
+  <testcase name="postIdValidationTestWithInvalidPostId()" classname="com.audition.impl.AuditionServiceImplTest" time="0.006"/>
+  <testcase name="getPostsTestWithTitle()" classname="com.audition.impl.AuditionServiceImplTest" time="0.006"/>
+  <testcase name="getPostsTestWithNoMatchingTitle()" classname="com.audition.impl.AuditionServiceImplTest" time="0.005"/>
+  <testcase name="getPostByIdTestWithNoDataException()" classname="com.audition.impl.AuditionServiceImplTest" time="0.007"/>
+  <testcase name="getCommentsTestWithNoDataFound()" classname="com.audition.impl.AuditionServiceImplTest" time="0.006"/>
+  <system-out><![CDATA[10:07:21.414 [Test worker] DEBUG com.audition.service.impl.AuditionServiceImpl - In AuditionServiceImpl.postIdValidation - Validating postId: 1
+10:07:21.421 [Test worker] DEBUG com.audition.service.impl.AuditionServiceImpl - In AuditionServiceImpl.postIdValidation - Validating postId: -1
+10:07:21.437 [Test worker] DEBUG com.audition.service.impl.AuditionServiceImpl - In AuditionServiceImpl.postIdValidation - Validating postId: abc
+10:07:21.442 [Test worker] DEBUG com.audition.service.impl.AuditionServiceImpl - In AuditionServiceImpl.getPosts - Filtering posts that contain title: Title
+10:07:21.449 [Test worker] DEBUG com.audition.service.impl.AuditionServiceImpl - In AuditionServiceImpl.getPosts - Filtering posts that contain title: Title2
+]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

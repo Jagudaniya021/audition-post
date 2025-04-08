@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.audition.configuration.WebServiceConfigurationTest" tests="3" skipped="0" failures="0" errors="0" timestamp="2025-04-08T00:07:20" hostname="JAGUDANIYA" time="0.424">
+  <properties/>
+  <testcase name="objectMapperBeanCreation()" classname="com.audition.configuration.WebServiceConfigurationTest" time="0.139"/>
+  <testcase name="createClientFactoryBean_usingReflection()" classname="com.audition.configuration.WebServiceConfigurationTest" time="0.011"/>
+  <testcase name="restTemplateBeanCreation()" classname="com.audition.configuration.WebServiceConfigurationTest" time="0.27"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

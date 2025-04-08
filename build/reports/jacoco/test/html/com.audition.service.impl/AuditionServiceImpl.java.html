@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>AuditionServiceImpl.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">audition-api</a> &gt; <a href="index.source.html" class="el_package">com.audition.service.impl</a> &gt; <span class="el_source">AuditionServiceImpl.java</span></div><h1>AuditionServiceImpl.java</h1><pre class="source lang-java linenums">/*
+ * Copyright 2025 XYZ, Inc.
+ *  Licensed under the XYZ License, Version 1.0
+ *  you may not use this file except in compliance with the License.
+ *  You may obtain a copy of the License at
+ *
+ *   http://www.xyz.org/licenses/LICENSE-1.0
+ */
+
+package com.audition.service.impl;
+
+import com.audition.common.constant.AuditionPostConstants;
+import com.audition.common.exception.SystemException;
+import com.audition.integration.AuditionIntegrationClient;
+import com.audition.model.AuditionPost;
+import com.audition.model.Comment;
+import com.audition.service.AuditionService;
+import java.util.List;
+import java.util.Objects;
+import java.util.stream.Collectors;
+import org.apache.commons.lang3.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.stereotype.Service;
+import org.springframework.util.CollectionUtils;
+
+/**
+ * Implementation of AuditionService.
+ */
+@Service
+<span class="fc" id="L33">public class AuditionServiceImpl implements AuditionService {</span>
+
+<span class="fc" id="L35">    private static final Logger LOGGER = LoggerFactory.getLogger(AuditionServiceImpl.class);</span>
+
+    @Autowired
+    private transient AuditionIntegrationClient auditionIntegrationClient;
+
+    /**
+     * Retrieve all post with title filter if given else returns all posts.
+     *
+     * @param title - post title.
+     * @return list of audition posts.
+     */
+    @Override
+    public List&lt;AuditionPost&gt; getPosts(final String title) {
+<span class="fc" id="L48">        final List&lt;AuditionPost&gt; list = auditionIntegrationClient.getPosts();</span>
+        // Check if the list is empty
+<span class="fc bfc" id="L50" title="All 2 branches covered.">        if (CollectionUtils.isEmpty(list)) {</span>
+<span class="fc" id="L51">            throw new SystemException(AuditionPostConstants.NO_POSTS_FOUND, HttpStatus.NOT_FOUND.getReasonPhrase(),</span>
+<span class="fc" id="L52">                HttpStatus.NOT_FOUND.value());</span>
+        }
+
+        // If no title is provided, return the list as is
+<span class="fc bfc" id="L56" title="All 2 branches covered.">        if (StringUtils.isEmpty(title)) {</span>
+<span class="fc" id="L57">            return list;</span>
+        }
+<span class="fc" id="L59">        LOGGER.debug(&quot;In AuditionServiceImpl.getPosts - Filtering posts that contain title: {}&quot;, title);</span>
+
+        // Filter AuditionPosts that contains title as given in method parameter
+<span class="fc" id="L62">        final List&lt;AuditionPost&gt; filteredPosts = list.stream().filter(post -&gt; post.getTitle().contains(title))</span>
+<span class="fc" id="L63">            .collect(Collectors.toList());</span>
+
+        // If no posts match, throw an exception
+<span class="fc bfc" id="L66" title="All 2 branches covered.">        if (CollectionUtils.isEmpty(filteredPosts)) {</span>
+<span class="fc" id="L67">            throw new SystemException(&quot;No posts found where the title contains: &quot; + title,</span>
+<span class="fc" id="L68">                HttpStatus.NOT_FOUND.getReasonPhrase(), HttpStatus.NOT_FOUND.value());</span>
+        }
+<span class="fc" id="L70">        return filteredPosts;</span>
+    }
+
+    /**
+     * Retrieve audition posts by postId.
+     *
+     * @param postId - audition post id.
+     * @return audition post object.
+     */
+    @Override
+    public AuditionPost getPostById(final String postId) {
+<span class="fc" id="L81">        final AuditionPost auditionPost = auditionIntegrationClient.getPostById(postId);</span>
+        // throw exception is there are no posts
+<span class="fc bfc" id="L83" title="All 2 branches covered.">        if (Objects.isNull(auditionPost)) {</span>
+<span class="fc" id="L84">            throw new SystemException(AuditionPostConstants.NO_POSTS_FOUND_FOR_ID_MATCHING + postId,</span>
+<span class="fc" id="L85">                HttpStatus.NOT_FOUND.getReasonPhrase(), HttpStatus.NOT_FOUND.value());</span>
+        }
+<span class="fc" id="L87">        return auditionPost;</span>
+    }
+
+    /**
+     * Retrieve post and it's all comments.
+     *
+     * @param postId - audition post id.
+     * @return audition post object.
+     */
+    @Override
+    public AuditionPost getPostWithComments(final String postId) {
+<span class="fc" id="L98">        return auditionIntegrationClient.getPostWithComments(postId);</span>
+    }
+
+
+    /**
+     * Retrieve all comments for given postId.
+     *
+     * @param postId - audition post id.
+     * @return list of comments.
+     */
+    @Override
+    public List&lt;Comment&gt; getComments(final String postId) {
+<span class="fc" id="L110">        final List&lt;Comment&gt; commentList = auditionIntegrationClient.getComments(postId);</span>
+        // throw exception is there are no comments
+<span class="fc bfc" id="L112" title="All 2 branches covered.">        if (CollectionUtils.isEmpty(commentList)) {</span>
+<span class="fc" id="L113">            throw new SystemException(AuditionPostConstants.NO_COMMENTS_FOUND_FOR_POST_ID_MATCHING + postId,</span>
+<span class="fc" id="L114">                HttpStatus.NOT_FOUND.getReasonPhrase(), HttpStatus.NOT_FOUND.value());</span>
+        }
+<span class="fc" id="L116">        return commentList;</span>
+    }
+
+    /**
+     * validate postId should be valid positive number.
+     *
+     * @param postId - audition post id.
+     */
+    @Override
+    public void postIdValidation(final String postId) {
+<span class="fc" id="L126">        LOGGER.debug(&quot;In AuditionServiceImpl.postIdValidation - Validating postId: {}&quot;, postId);</span>
+        try {
+<span class="fc bfc" id="L128" title="All 2 branches covered.">            if (Integer.parseInt(postId) &lt;= 0) {</span>
+<span class="fc" id="L129">                throw new NumberFormatException();</span>
+            }
+<span class="fc" id="L131">        } catch (NumberFormatException e) {</span>
+<span class="fc" id="L132">            throw new SystemException(&quot;Invalid PostId format. Must be a positive integer&quot;,</span>
+<span class="fc" id="L133">                HttpStatus.NOT_FOUND.getReasonPhrase(), HttpStatus.NOT_FOUND.value(), e);</span>
+<span class="fc" id="L134">        }</span>
+<span class="fc" id="L135">    }</span>
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>

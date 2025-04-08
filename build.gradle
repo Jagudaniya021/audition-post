@@ -1,0 +1,114 @@
+plugins {
+    id 'java'
+    id 'org.springframework.boot' version '3.0.3'
+    id 'io.spring.dependency-management' version '1.1.0'
+    id "maven-publish"
+    id 'jacoco'
+    id "com.github.spotbugs" version "5.0.14"
+    id "io.freefair.lombok" version "8.0.1"
+    id "checkstyle"
+    id "pmd"
+}
+
+pmd {
+    consoleOutput = true
+    toolVersion = "7.0.0"
+    rulesMinimumPriority = 5
+    ruleSets = ["category/java/errorprone.xml", "category/java/bestpractices.xml"]
+}
+
+group = 'com.audition'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '17'
+targetCompatibility = '17'
+
+apply from: 'config/code-analysis.gradle'
+
+
+configurations {
+    compileOnly {
+        extendsFrom annotationProcessor
+    }
+}
+
+repositories {
+    mavenCentral()
+}
+
+ext {
+    set('springCloudVersion', "2022.0.1")
+    set('logbackVersion', "1.4.5")
+    set('slf4jVersion', "2.0.5")
+    set('springdocVersion', "2.0.2")
+}
+
+dependencies {
+
+    // Core Spring Boot dependencies for web, data, and monitoring
+    implementation "org.springframework.boot:spring-boot-starter-web"
+    implementation "org.springframework.boot:spring-boot-starter-data-jpa"
+    implementation "org.springframework.boot:spring-boot-starter-actuator"
+    implementation "org.springframework.cloud:spring-cloud-starter-config"
+    implementation 'org.springframework.boot:spring-boot-starter-security'
+    implementation 'org.springframework.boot:spring-boot-starter-oauth2-client'
+    // Even though spring-boot-starter-web contains this dependency. Its better to explicitly include this dependency as we're using it in our project.
+    implementation 'jakarta.servlet:jakarta.servlet-api:latest.release'
+
+    // OpenAPI documentation using SpringDoc
+    implementation "org.springdoc:springdoc-openapi-starter-webmvc-ui:${springdocVersion}"
+
+    // Logging setup
+    implementation "org.slf4j:slf4j-api:${slf4jVersion}"
+
+    // Data bind
+    implementation 'com.fasterxml.jackson.core:jackson-databind'
+
+    // Observability and metrics
+    implementation "io.micrometer:micrometer-tracing-bridge-brave"
+    implementation "io.micrometer:micrometer-tracing"
+    implementation "io.micrometer:micrometer-registry-prometheus"
+    implementation "io.micrometer:context-propagation"
+    implementation "io.opentelemetry.instrumentation:opentelemetry-spring-boot-starter"
+
+    // AOP support.
+    implementation "org.springframework.boot:spring-boot-starter-aop"
+
+    // Development tools.
+    developmentOnly "org.springframework.boot:spring-boot-devtools"
+
+    // Testing dependencies.
+    testImplementation "org.springframework.boot:spring-boot-starter-test"
+    testImplementation 'org.mockito:mockito-core'
+    testImplementation 'org.mockito:mockito-inline'
+    testImplementation 'org.junit.jupiter:junit-jupiter-api'
+    testImplementation 'org.junit.jupiter:junit-jupiter-engine'
+
+
+    //Considerations:
+    // We can exclude Jakarta dependency from web if we need to use any different version - there can be multiple scenario
+    // 'spring-boot-starter-logging' includes and handles version/configuration for slf4j and logback.
+    // Removed other unused dependencies to reduce project size and potential conflicts
+}
+
+
+dependencyManagement {
+    imports {
+        mavenBom "org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}"
+        mavenBom("io.opentelemetry.instrumentation:opentelemetry-instrumentation-bom:2.14.0")
+    }
+}
+
+
+task prepareGitHooks(type: Copy) {
+    from "$projectDir/git-hooks"
+    into "$projectDir/.git/hooks"
+    include "*"
+}
+tasks.matching { it.name != 'prepareGitHooks' }.all { Task task -> task.dependsOn prepareGitHooks }
+
+
+tasks.named('test') {
+    useJUnitPlatform()
+}
+
+

@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>AuditionLogger.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">audition-api</a> &gt; <a href="index.source.html" class="el_package">com.audition.common.logging</a> &gt; <span class="el_source">AuditionLogger.java</span></div><h1>AuditionLogger.java</h1><pre class="source lang-java linenums">package com.audition.common.logging;
+
+import org.slf4j.Logger;
+import org.springframework.http.ProblemDetail;
+import org.springframework.stereotype.Component;
+
+/**
+ * Common Logger.
+ */
+@Component
+<span class="fc" id="L11">public class AuditionLogger {</span>
+
+    public static final String ERROR_MESSAGE_PATTERN = &quot;%s - %s&quot;;
+
+    public void info(final Logger logger, final String message) {
+<span class="fc bfc" id="L16" title="All 2 branches covered.">        if (logger.isInfoEnabled()) {</span>
+<span class="fc" id="L17">            logger.info(message);</span>
+        }
+<span class="fc" id="L19">    }</span>
+
+    public void info(final Logger logger, final String message, final Object object) {
+<span class="fc bfc" id="L22" title="All 2 branches covered.">        if (logger.isInfoEnabled()) {</span>
+<span class="fc" id="L23">            logger.info(message, object);</span>
+        }
+<span class="fc" id="L25">    }</span>
+
+    public void debug(final Logger logger, final String message) {
+<span class="fc bfc" id="L28" title="All 2 branches covered.">        if (logger.isDebugEnabled()) {</span>
+<span class="fc" id="L29">            logger.debug(message);</span>
+        }
+<span class="fc" id="L31">    }</span>
+
+    public void warn(final Logger logger, final String message) {
+<span class="fc bfc" id="L34" title="All 2 branches covered.">        if (logger.isWarnEnabled()) {</span>
+<span class="fc" id="L35">            logger.warn(message);</span>
+        }
+<span class="fc" id="L37">    }</span>
+
+    public void error(final Logger logger, final String message) {
+<span class="fc bfc" id="L40" title="All 2 branches covered.">        if (logger.isErrorEnabled()) {</span>
+<span class="fc" id="L41">            logger.error(message);</span>
+        }
+<span class="fc" id="L43">    }</span>
+
+    public void logErrorWithException(final Logger logger, final String message, final Exception e) {
+<span class="fc bfc" id="L46" title="All 2 branches covered.">        if (logger.isErrorEnabled()) {</span>
+<span class="fc" id="L47">            logger.error(message, e);</span>
+        }
+<span class="fc" id="L49">    }</span>
+
+    public void logStandardProblemDetail(final Logger logger, final ProblemDetail problemDetail,
+        final Exception e) {
+<span class="fc bfc" id="L53" title="All 2 branches covered.">        if (logger.isErrorEnabled()) {</span>
+<span class="fc" id="L54">            final var message = createStandardProblemDetailMessage(problemDetail);</span>
+<span class="fc" id="L55">            logger.error(message, e);</span>
+        }
+<span class="fc" id="L57">    }</span>
+
+    public void logHttpStatusCodeError(final Logger logger, final String message, final Integer errorCode) {
+<span class="fc bfc" id="L60" title="All 2 branches covered.">        if (logger.isErrorEnabled()) {</span>
+<span class="fc" id="L61">            logger.error(createBasicErrorResponseMessage(errorCode, message) + &quot;\n&quot;);</span>
+        }
+<span class="fc" id="L63">    }</span>
+
+    private String createStandardProblemDetailMessage(final ProblemDetail standardProblemDetail) {
+<span class="fc" id="L66">        return standardProblemDetail.toString();</span>
+    }
+
+    private String createBasicErrorResponseMessage(final Integer errorCode, final String message) {
+<span class="fc" id="L70">        return String.format(ERROR_MESSAGE_PATTERN, errorCode, message);</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>
