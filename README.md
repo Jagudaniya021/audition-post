@@ -62,7 +62,8 @@ curl -u admin:adminPassword http://localhost:8080/actuator/health
   through [http://localhost:8080/swagger-ui.html](http://localhost:8080/swagger-ui.html
   )
 - Click on the top right green 'Authorize' button.
-- Provide the <b>username:</b> `admin` and <b>password:</b> `adminPassword` to accesss all the listed APIs.
+- Provide the <b>username:</b> `admin` and <b>password:</b> `adminPassword`. Click on Authorize and then Close button.
+- All APIs now will be available to try.
 
 <h2>Highlights of Implementation</h2>
 
